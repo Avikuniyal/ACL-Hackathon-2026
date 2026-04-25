@@ -1,0 +1,19 @@
+body {
+  font-family:  sans-serif;
+}
+.center {
+  align-content: center;
+}
+#why_clone {
+  background-color: rgb(249, 206, 255);
+  margin: 10%;
+  padding: 20px;
+  border-radius: 10px;
+}
+#Title_Card {
+  background-color: rgb(252, 153, 240);
+  margin: 10%;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
