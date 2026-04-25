@@ -1,0 +1,15 @@
+body {
+  background-color: rgb(32, 32, 32);
+  font-family:
+    "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans",
+    Arial, sans-serif, sans-serif;
+  color: white;
+    text-align: center;
+}
+
+header {
+    background-color: #333;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    text-align: left;
+}

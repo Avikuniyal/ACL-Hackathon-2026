@@ -1,0 +1,29 @@
+body {
+  background-color: rgb(32, 32, 32);
+  font-family:
+    "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans",
+    Arial, sans-serif, sans-serif;
+  color: white;
+  text-align: center;
+}
+.password-container {
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+}
+.username-container {
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+}
