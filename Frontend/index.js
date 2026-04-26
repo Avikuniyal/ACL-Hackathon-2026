@@ -56,6 +56,8 @@ function handleLogin(event) {
   btn.disabled = true;
 
   // TODO: Firebase Auth — signInWithEmailAndPassword(auth, email, password)
+  
+
   setTimeout(() => {
     window.location.href = 'dashboard.html';
   }, 800);
