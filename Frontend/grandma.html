@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Stay Close">
+  <meta name="theme-color" content="#FDF8F2">
+  <title>Stay Close</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="grandma.css">
+</head>
+<body>
+
+  <!-- ====== VIEW: HOME SCREEN ====== -->
+  <div id="view-home" class="view active">
+    <div class="home-wrap">
+      <p class="greeting" id="greeting">Good morning, Dorothy</p>
+
+      <div class="sarah-photo-ring">
+        <div class="sarah-photo" id="home-photo">
+          <span id="home-initial">S</span>
+        </div>
+        <div class="soft-glow"></div>
+      </div>
+
+      <p class="sarah-name" id="sarah-name-display">Sarah</p>
+      <p class="sarah-relation" id="sarah-relation-display">Your Daughter</p>
+
+      <div class="home-buttons">
+        <button class="btn-call" onclick="showView('view-call')">
+          <span class="btn-call-icon">📞</span>
+          <span class="btn-call-label">Call Sarah</span>
+        </button>
+
+        <button class="btn-ask" onclick="showView('view-ask')">
+          <span class="btn-ask-icon">💬</span>
+          <span class="btn-ask-label">Ask a Question</span>
+        </button>
+      </div>
+
+      <p class="call-reminder" id="call-reminder">Sarah calls you every morning at 9:00 AM</p>
+    </div>
+  </div>
+
+  <!-- ====== VIEW: ACTIVE CALL ====== -->
+  <div id="view-call" class="view">
+    <div class="call-wrap">
+      <div class="call-photo-ring">
+        <div class="call-photo" id="call-photo">
+          <span id="call-initial">S</span>
+        </div>
+        <div class="call-pulse call-pulse-1"></div>
+        <div class="call-pulse call-pulse-2"></div>
+        <div class="call-pulse call-pulse-3"></div>
+      </div>
+
+      <p class="call-name" id="call-name">Sarah</p>
+      <p class="call-status-text">Calling…</p>
+
+      <div class="sound-wave" id="sound-wave" aria-hidden="true">
+        <div class="wave-bar bar-1"></div>
+        <div class="wave-bar bar-2"></div>
+        <div class="wave-bar bar-3"></div>
+        <div class="wave-bar bar-4"></div>
+        <div class="wave-bar bar-5"></div>
+        <div class="wave-bar bar-6"></div>
+        <div class="wave-bar bar-7"></div>
+      </div>
+
+      <button class="btn-end-call" onclick="endCall()">
+        🔴 End Call
+      </button>
+    </div>
+  </div>
+
+  <!-- ====== VIEW: ASK A QUESTION ====== -->
+  <div id="view-ask" class="view">
+    <div class="ask-wrap">
+      <button class="back-home" onclick="showView('view-home')" aria-label="Go home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="28" height="28"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
+
+      <h1 class="ask-title" id="ask-prompt">What would you like to know, Dorothy?</h1>
+
+      <button class="btn-mic" id="mic-btn" onclick="toggleMic()">
+        <svg id="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="52" height="52">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+      </button>
+
+      <div class="mic-wave hidden" id="mic-wave" aria-hidden="true">
+        <div class="wave-bar bar-1"></div>
+        <div class="wave-bar bar-2"></div>
+        <div class="wave-bar bar-3"></div>
+        <div class="wave-bar bar-4"></div>
+        <div class="wave-bar bar-5"></div>
+      </div>
+
+      <p class="mic-instruction" id="mic-instruction">Tap and speak your question</p>
+
+      <div class="ask-divider">
+        <span>or</span>
+      </div>
+
+      <div class="type-question-area">
+        <label for="type-question" class="type-label">Or type your question</label>
+        <textarea
+          id="type-question"
+          class="type-input"
+          rows="3"
+          placeholder="Type your question here…"
+          autocorrect="off"
+          autocapitalize="sentences"
+        ></textarea>
+        <button class="btn-submit-text" onclick="submitTextQuestion()">Ask →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== VIEW: ANSWER ====== -->
+  <div id="view-answer" class="view">
+    <div class="answer-wrap">
+      <div class="answer-header">
+        <div class="answer-sarah-thumb" id="answer-sarah-thumb">
+          <span id="answer-initial">S</span>
+        </div>
+        <div>
+          <p class="answer-from-label" id="answer-from-name">Sarah says:</p>
+          <p class="answer-playing-status" id="answer-playing-status">🔊 Playing…</p>
+        </div>
+      </div>
+
+      <div class="answer-text-box">
+        <p class="answer-text" id="answer-text">Thinking…</p>
+      </div>
+
+      <div class="answer-buttons">
+        <button class="btn-ask-again" onclick="showView('view-ask')">
+          🔁 Ask another question
+        </button>
+        <button class="btn-go-home" onclick="showView('view-home')">
+          🏠 Go home
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== VIEW: ERROR STATE ====== -->
+  <div id="view-error" class="view">
+    <div class="error-wrap">
+      <p class="error-emoji">😔</p>
+      <p class="error-text">Something went wrong —</p>
+      <p class="error-sub">tap here and Sarah will know</p>
+      <button class="btn-alert-sarah" onclick="alertSarah()">Let Sarah know</button>
+      <button class="btn-try-again" onclick="showView('view-home')">Try again</button>
+    </div>
+  </div>
+
+  <!-- ====== VIEW: MISSING USER ====== -->
+  <div id="view-missing" class="view">
+    <div class="error-wrap">
+      <p class="error-emoji">💛</p>
+      <p class="error-text">This link doesn't look quite right.</p>
+      <p class="error-sub">Ask Sarah to send the link again.</p>
+    </div>
+  </div>
+
+  <script src="grandma.js"></script>
+</body>
+</html>

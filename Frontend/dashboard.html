@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stay Close — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <!-- ====== SIDEBAR ====== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">Stay Close</div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-panel="panel-dashboard" onclick="showPanel('panel-dashboard', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a class="nav-item" data-panel="panel-calls" onclick="showPanel('panel-calls', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+        Call Logs
+      </a>
+      <a class="nav-item" data-panel="panel-memory" onclick="showPanel('panel-memory', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+        Memory Card
+      </a>
+      <a class="nav-item" data-panel="panel-schedule" onclick="showPanel('panel-schedule', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Schedule
+      </a>
+      <a class="nav-item" data-panel="panel-alerts" onclick="showPanel('panel-alerts', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        Alerts
+        <span class="nav-badge" id="nav-alert-badge">1</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="account-info">
+        <div class="account-avatar">S</div>
+        <div>
+          <p class="account-name">Sarah</p>
+          <p class="account-sub">sarah@example.com</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="main-content">
+
+    <!-- ====== PANEL: DASHBOARD ====== -->
+    <div id="panel-dashboard" class="panel active">
+
+      <!-- Urgent alert strip -->
+      <div class="alert-strip urgent" id="alert-strip">
+        <span class="alert-strip-dot"></span>
+        <p>🔴 <strong>Urgent:</strong> Dorothy said "I fell" during yesterday's call. <a href="#" onclick="showPanel('panel-alerts', document.querySelector('[data-panel=panel-alerts]'))">View alert →</a></p>
+        <button class="alert-strip-close" onclick="dismissAlertStrip()" aria-label="Dismiss">×</button>
+      </div>
+
+      <!-- Dorothy status card -->
+      <section class="status-section">
+        <div class="dorothy-card">
+          <div class="dorothy-photo">D</div>
+          <div class="dorothy-info">
+            <h2 class="dorothy-name">Dorothy</h2>
+            <p class="dorothy-relation">Your Mom</p>
+            <div class="last-call-status">
+              <span class="status-dot green"></span>
+              <span>Called this morning · 9:03 AM</span>
+            </div>
+          </div>
+          <div class="dorothy-actions">
+            <button class="btn-call-now" onclick="callNow()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/>
+              </svg>
+              Call Dorothy Now
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick actions -->
+      <section class="quick-actions-section">
+        <div class="quick-actions">
+          <button class="quick-btn" onclick="showPanel('panel-memory', document.querySelector('[data-panel=panel-memory]'))">
+            <div class="quick-icon">📝</div>
+            <span>Update Memory Card</span>
+          </button>
+          <button class="quick-btn" onclick="showPanel('panel-schedule', document.querySelector('[data-panel=panel-schedule]'))">
+            <div class="quick-icon">🕘</div>
+            <span>Change Schedule</span>
+          </button>
+          <button class="quick-btn" onclick="showPanel('panel-calls', document.querySelector('[data-panel=panel-calls]'))">
+            <div class="quick-icon">📋</div>
+            <span>View Call Logs</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Recent calls -->
+      <section class="recent-calls-section">
+        <div class="section-header">
+          <h3 class="section-title">Recent Calls</h3>
+          <span class="section-sub">Last 7 days</span>
+        </div>
+
+        <div class="call-cards" id="call-cards">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ====== PANEL: CALL LOGS ====== -->
+    <div id="panel-calls" class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Call Logs</h2>
+        <p class="panel-desc">Every conversation Dorothy has had.</p>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="setCallFilter('all', this)">All</button>
+        <button class="filter-btn" onclick="setCallFilter('urgent', this)">🔴 Urgent</button>
+        <button class="filter-btn" onclick="setCallFilter('routine', this)">🟡 Routine</button>
+        <button class="filter-btn" onclick="setCallFilter('clear', this)">✅ All Clear</button>
+      </div>
+
+      <div class="call-log-list" id="call-log-list">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- ====== PANEL: MEMORY CARD ====== -->
+    <div id="panel-memory" class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Dorothy's Memory Card</h2>
+        <p class="panel-desc">This is the context that shapes every conversation.</p>
+        <button class="btn-save-memory" id="save-memory-btn" onclick="saveMemoryCard()" style="display:none">Save Changes</button>
+      </div>
+
+      <div class="memory-edit-form">
+
+        <div class="memory-edit-section">
+          <h4 class="memory-edit-label">Topics she loves</h4>
+          <div class="topic-tags" id="memory-topic-tags">
+            <button class="topic-tag selected">🌱 Garden</button>
+            <button class="topic-tag selected">👨‍👩‍👧 Family</button>
+            <button class="topic-tag selected">📺 TV Shows</button>
+            <button class="topic-tag">🍳 Cooking</button>
+            <button class="topic-tag">🎵 Music</button>
+            <button class="topic-tag selected">🙏 Religion</button>
+            <button class="topic-tag">✈️ Travel</button>
+            <button class="topic-tag">📚 Books</button>
+          </div>
+        </div>
+
+        <div class="memory-edit-section">
+          <h4 class="memory-edit-label">Upcoming appointments</h4>
+          <div id="memory-appointments">
+            <div class="list-item">
+              <input type="date" value="2026-04-28" class="list-item-date">
+              <input type="text" value="Cardiologist checkup — Dr. Rivera">
+              <button class="list-item-remove">×</button>
+            </div>
+            <div class="list-item">
+              <input type="date" value="2026-05-05" class="list-item-date">
+              <input type="text" value="Hair appointment with Betty">
+              <button class="list-item-remove">×</button>
+            </div>
+          </div>
+          <button class="add-item-btn" onclick="addMemoryAppointment()">+ Add appointment</button>
+        </div>
+
+        <div class="memory-edit-section">
+          <h4 class="memory-edit-label">Medications</h4>
+          <div id="memory-medications">
+            <div class="list-item">
+              <input type="text" value="Lisinopril 10mg — morning with breakfast">
+              <button class="list-item-remove">×</button>
+            </div>
+            <div class="list-item">
+              <input type="text" value="Metformin 500mg — morning and evening">
+              <button class="list-item-remove">×</button>
+            </div>
+          </div>
+          <button class="add-item-btn" onclick="addMemoryMedication()">+ Add medication</button>
+        </div>
+
+        <div class="memory-edit-section">
+          <h4 class="memory-edit-label">People she mentions</h4>
+          <div class="memory-names">
+            <span class="name-tag">Betty <button>×</button></span>
+            <span class="name-tag">Pastor Jim <button>×</button></span>
+            <span class="name-tag">Cousin Earl <button>×</button></span>
+            <input type="text" class="tag-free-input inline" placeholder="Add a name…" onkeydown="addMemoryName(event)">
+          </div>
+        </div>
+
+        <div class="memory-edit-section">
+          <h4 class="memory-edit-label">Your personal phrases</h4>
+          <textarea class="memory-textarea" rows="3">You've got this. Love you to the moon. Don't forget to eat something.</textarea>
+        </div>
+
+        <button class="btn-primary" onclick="saveMemoryCard()">Save Memory Card</button>
+      </div>
+    </div>
+
+    <!-- ====== PANEL: SCHEDULE ====== -->
+    <div id="panel-schedule" class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Call Schedule</h2>
+        <p class="panel-desc">Dorothy's daily call settings.</p>
+      </div>
+
+      <div class="schedule-form">
+        <div class="form-group">
+          <label>Call time</label>
+          <input type="time" id="sched-time" value="09:00" class="time-picker-input">
+        </div>
+        <div class="form-group">
+          <label>Timezone</label>
+          <select id="sched-timezone" class="select-input">
+            <option value="America/New_York" selected>Eastern Time (ET)</option>
+            <option value="America/Chicago">Central Time (CT)</option>
+            <option value="America/Denver">Mountain Time (MT)</option>
+            <option value="America/Los_Angeles">Pacific Time (PT)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Call days</label>
+          <div class="day-toggles">
+            <button class="day-btn active" data-day="mon">M</button>
+            <button class="day-btn active" data-day="tue">T</button>
+            <button class="day-btn active" data-day="wed">W</button>
+            <button class="day-btn active" data-day="thu">T</button>
+            <button class="day-btn active" data-day="fri">F</button>
+            <button class="day-btn active" data-day="sat">S</button>
+            <button class="day-btn active" data-day="sun">S</button>
+          </div>
+        </div>
+        <div class="schedule-status-line">
+          <span class="status-dot green"></span>
+          <span class="schedule-status-text" id="schedule-status-text">Next call: tomorrow at 9:00 AM ET</span>
+        </div>
+        <button class="btn-primary" onclick="saveSchedule()">Save Schedule</button>
+      </div>
+    </div>
+
+    <!-- ====== PANEL: ALERTS ====== -->
+    <div id="panel-alerts" class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Alert Log</h2>
+        <p class="panel-desc">Anything that needed your attention.</p>
+      </div>
+
+      <div class="alert-tabs">
+        <button class="alert-tab active" onclick="setAlertTab('urgent', this)">🔴 Urgent</button>
+        <button class="alert-tab" onclick="setAlertTab('routine', this)">🟡 Routine</button>
+      </div>
+
+      <div id="alerts-urgent" class="alerts-list">
+        <div class="alert-card urgent-card">
+          <div class="alert-card-header">
+            <span class="alert-badge urgent-badge">🔴 Urgent</span>
+            <span class="alert-date">Today · Apr 25, 2026</span>
+          </div>
+          <p class="alert-message">Dorothy said <strong>"I fell"</strong> during this morning's call.</p>
+          <p class="alert-context">Call duration: 4m 12s · Transcript excerpt: "…I wasn't feeling too well this morning, I fell getting up…"</p>
+          <div class="alert-actions">
+            <a href="#" class="alert-link" onclick="expandCallTranscript('call-001')">View full transcript</a>
+            <span class="alert-separator">·</span>
+            <a href="#" class="alert-link" onclick="callNow()">Call Dorothy now</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="alerts-routine" class="alerts-list hidden">
+        <div class="alert-card routine-card">
+          <div class="alert-card-header">
+            <span class="alert-badge routine-badge">🟡 Routine</span>
+            <span class="alert-date">Apr 22, 2026</span>
+          </div>
+          <p class="alert-message">Call was shorter than usual — only 1m 48s.</p>
+          <p class="alert-context">Dorothy mentioned she was tired and wanted to rest.</p>
+          <a href="#" class="alert-link">View full transcript</a>
+        </div>
+        <div class="alert-card routine-card">
+          <div class="alert-card-header">
+            <span class="alert-badge routine-badge">🟡 Routine</span>
+            <span class="alert-date">Apr 19, 2026</span>
+          </div>
+          <p class="alert-message">No answer — Dorothy did not pick up this morning.</p>
+          <p class="alert-context">No response after 4 rings. Auto-retry scheduled for 10:00 AM.</p>
+          <a href="#" class="alert-link">View details</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ====== TRANSCRIPT MODAL ====== -->
+  <div class="modal-overlay hidden" id="transcript-modal" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="modal-title">Call Transcript</h3>
+          <p class="modal-sub" id="modal-sub"></p>
+        </div>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-summary" id="modal-summary"></div>
+      <div class="modal-transcript" id="modal-transcript"></div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

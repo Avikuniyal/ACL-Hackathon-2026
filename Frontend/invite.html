@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A message from Sarah</title>
+  <!-- No tech-company fonts for Dorothy — use system serif for warmth -->
+  <link rel="stylesheet" href="invite.css">
+</head>
+<body>
+
+  <!-- ====== VIEW: LANDING (Yes / No) ====== -->
+  <div id="view-invite" class="view active">
+
+    <!-- iOS in-app browser warning -->
+    <div class="browser-warning hidden" id="browser-warning">
+      <p>For the best experience, please open this in Safari.</p>
+      <p class="browser-warning-sub">Tap the share button, then "Open in Safari"</p>
+    </div>
+
+    <div class="invite-card">
+      <div class="sarah-photo-wrap">
+        <div class="sarah-photo" id="sarah-photo">
+          <span id="sarah-initial">S</span>
+        </div>
+        <div class="photo-glow"></div>
+      </div>
+
+      <h1 class="invite-greeting" id="invite-greeting">Hi Dorothy! 👋</h1>
+      <p class="invite-from" id="invite-from">Sarah set this up for you 💛</p>
+
+      <div class="invite-explain">
+        <p>This is a special app so you and Sarah can stay in touch every day.</p>
+        <p>She'll call you every morning, and you can reach her anytime.</p>
+      </div>
+
+      <div class="invite-buttons">
+        <button class="btn-yes" onclick="handleAccept()">
+          ✅ Yes, I'd love this
+        </button>
+        <button class="btn-no" onclick="handleDecline()">
+          ❌ No thank you
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ====== VIEW: DECLINED ====== -->
+  <div id="view-declined" class="view">
+    <div class="invite-card center-card">
+      <div class="decline-message">
+        <p class="decline-text">No problem Dorothy —</p>
+        <p class="decline-text">Sarah will be in touch another way. 💛</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== VIEW: CONFIRMED + INSTALL ====== -->
+  <div id="view-confirmed" class="view">
+    <div class="invite-card">
+
+      <div class="confirm-checkmark">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <circle cx="40" cy="40" r="38" fill="#E8F7F0" stroke="#2D8A5E" stroke-width="3"/>
+          <polyline points="20,42 35,57 62,28" stroke="#2D8A5E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"
+            stroke-dasharray="60" stroke-dashoffset="60">
+            <animate attributeName="stroke-dashoffset" from="60" to="0" dur="0.6s" fill="freeze" begin="0.2s"/>
+          </polyline>
+        </svg>
+      </div>
+
+      <h1 class="confirm-title">Wonderful!</h1>
+      <p class="confirm-sub" id="confirm-sub">Sarah will be so happy 💛</p>
+
+      <div class="install-prompt">
+        <p class="install-lead">Add this to your home screen so you can find it easily.</p>
+
+        <!-- iOS instructions -->
+        <div id="ios-install" class="install-steps hidden">
+          <div class="install-step">
+            <div class="step-num">1</div>
+            <p>Tap the <strong>Share button</strong> at the bottom of Safari
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-left:4px">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                <polyline points="16,6 12,2 8,6"/>
+                <line x1="12" y1="2" x2="12" y2="15"/>
+              </svg>
+            </p>
+          </div>
+          <div class="install-step">
+            <div class="step-num">2</div>
+            <p>Scroll down and tap <strong>"Add to Home Screen"</strong></p>
+          </div>
+          <div class="install-step">
+            <div class="step-num">3</div>
+            <p>Tap <strong>"Add"</strong> in the top right corner</p>
+          </div>
+        </div>
+
+        <!-- Android instructions -->
+        <div id="android-install" class="install-steps hidden">
+          <div class="install-step">
+            <div class="step-num">1</div>
+            <p>Tap the <strong>three dots menu</strong> at the top right of Chrome</p>
+          </div>
+          <div class="install-step">
+            <div class="step-num">2</div>
+            <p>Tap <strong>"Add to Home screen"</strong></p>
+          </div>
+          <div class="install-step">
+            <div class="step-num">3</div>
+            <p>Tap <strong>"Add"</strong> to confirm</p>
+          </div>
+        </div>
+
+        <!-- Generic fallback -->
+        <div id="generic-install" class="install-steps">
+          <p class="install-generic">Open your browser menu and look for "Add to Home Screen" to save this app for easy access.</p>
+        </div>
+      </div>
+
+      <div class="install-cta">
+        <button class="btn-added" onclick="handleAdded()">I added it!</button>
+        <a href="grandma.html" class="skip-link" id="skip-to-app">I'll do it later → go to app</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="invite.js"></script>
+</body>
+</html>
