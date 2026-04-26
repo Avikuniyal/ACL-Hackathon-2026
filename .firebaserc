@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "aclhacks26-stayclos"
-  }
+    "default": "acl-hackathon"
+  },
+  "targets": {},
+  "etags": {}
 }

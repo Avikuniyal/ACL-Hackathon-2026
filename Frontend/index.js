@@ -67,3 +67,9 @@ function handleGoogleSignIn() {
   // TODO: Firebase Auth — signInWithPopup(auth, new GoogleAuthProvider())
   window.location.href = 'setup.html';
 }
+
+const functions = require("Firebase-functions");
+
+exports.helloWorld = functions.https.onRequest((request, response) => {
+  response.send("Hello from Firebase!");
+});
