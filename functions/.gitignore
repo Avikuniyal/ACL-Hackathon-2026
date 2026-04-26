@@ -1,7 +1,4 @@
-# Python bytecode
-__pycache__/
-
-# Python virtual environment
-venv/
-*.local
+.env
 serviceAccountKey.json
+node_modules/
+*.mp3
